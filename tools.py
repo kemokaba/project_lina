@@ -1,6 +1,7 @@
 import nltk
 import os
 import json
+import imutils
 from imutils import paths
 from nltk.stem.snowball import FrenchStemmer
 
