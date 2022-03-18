@@ -1,0 +1,7 @@
+[{
+    "subject":"search",
+    "sentences": ["@youtube"],
+    "responses": ["Voici les résultats du recherche"],
+    "value": 1,
+    "type":"question"
+}]
