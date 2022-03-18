@@ -1,14 +1,9 @@
-from kivymd.app import App
+from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.uix.image import Image
-from kivy.uix.button import Button
-from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager
-import re 
+from kivymd.uix.label import MDLabel
+from kivy.properties import StringProperty, NumericProperty
 
 from PIL import ImageGrab, Image
 import models
@@ -20,56 +15,74 @@ from pluginFactory import PluginFactory
  
 Window.size = (350,550)
 
-class ChatBot(App):
-    
+class Command(MDLabel):
+    text = StringProperty()
+    size_hint_x = NumericProperty()
+    halign = StringProperty()
+    font_name = "Front/Poppins-Regular.ttf"
+    font_size = 30
+
+
+class Response(MDLabel):
+    text = StringProperty()
+    size_hint_x = NumericProperty()
+    halign = StringProperty()
+    font_name = "Front/Poppins-Regular.ttf"
+    font_size = 30
+
+class TestApp(MDApp):
+
     def build(self):
-            self.window = GridLayout()
-            self.window.cols = 1
-            self.window.size_hint = (0.6, 0.7)
-            self.window.pos_hint = {"center_x":0.5, "center_y":0.5}
-            # add widgets to window
-            
-            # image widget
-            #self.window.add_widget(Image(source)="logo.png")
-            
-            # label widget
-            self.greeting = Label(
-                            text=str("Tape your sentence"),
-                            font_size = 18,
-                            color="#00FFCE"
-                            )
-            self.window.add_widget(self.greeting)
-            
-            # text input widget
-            
-            self.user =  TextInput(
-                         multiline=False,
-                         padding_y = (20,20),
-                         size_hint = (1, 0.5)
-                         )
-            self.window.add_widget(self.user)
-            
-            # button widget 
-            self.button =  Button(
-                           text="SEND",
-                           size_hint = (1, 0.5),
-                           bold = True,
-                           background_color = "#00FFCE",
-                           background_normal = ""
-                           )
-            
-            self.button.bind(on_press=self.callback)
-            #self.button.bind(on_press=self.analyse)
-            
-            self.window.add_widget(self.button)
-            return self.window
-            
-            # fonction callback
-    def  callback(self, instance):
-        #self.greeting.text = "Hello " + self.user.text + " !"
-        #rSubject, rType, rValue = self.analyse(re)
-        self.greeting.text = self.interface()
-        #print(self.result)
+        # Create the screen manager
+        global sm
+        sm = ScreenManager()
+        sm.add_widget(Builder.load_file('Front/Main.kv'))
+        sm.add_widget(Builder.load_file('Front/Chats.kv'))
+        return sm
+
+    def response(self, value):
+        global size, halign
+        response = self.interface(value)
+        if len(response) < 6:
+            size = .22
+        elif len(response) < 11:
+            size = .32
+        elif len(response) < 16:
+            size = .45
+        elif len(response) < 21:
+            size = .58
+        elif len(value) < 26:
+            size = .71
+        else:
+            size = .77
+        sm.get_screen('chats').chat_list.add_widget(Response(text=response, size_hint_x=size))
+
+    def send(self):
+        global size, halign, value
+        if sm.get_screen('chats').text_input != "":
+            value = sm.get_screen('chats').text_input.text
+            if len(value) < 6:
+                size = .22
+                halign = "center"
+            elif len(value) < 11:
+                size = .32
+                halign = "center"
+            elif len(value) < 16:
+                size = .45
+                halign = "center"
+            elif len(value) < 21:
+                size = .58
+                halign = "center"
+            elif len(value) < 26:
+                size = .71
+                halign = "center"
+            else:
+                size = .77
+                halign = "left"
+            sm.get_screen('chats').chat_list.add_widget(Command(text=value, size_hint_x=size, halign=halign))
+            self.response(value)
+            sm.get_screen('chats').text_input.text = ""
+
         
          
     
@@ -106,15 +119,15 @@ class ChatBot(App):
           plugin = PluginFactory.getPlugin(subject, typeS)
           return plugin.response(sentence)
       
-    def interface(self):
+    def interface(self, value):
         subjects, types, stopwords, dictionnary = tools.defaultValues()
         #while True:
             #print("Tape your sentence:")
             #test= input()
         print("je pass la 00")
-        print("---->",self.user.text)
-        rSubject, rType, rValue = self.analyse(self.user.text)
-        self.result = self.searchAnswer(self.user.text, subjects[numpy.argmax(rSubject)], types[numpy.argmax(rType)])
+        print("---->",value)
+        rSubject, rType, rValue = self.analyse(value)
+        self.result = self.searchAnswer(value, subjects[numpy.argmax(rSubject)], types[numpy.argmax(rType)])
         print("---->", self.result)
         #print(result)
         return self.result
@@ -122,7 +135,7 @@ class ChatBot(App):
     
     
 if __name__ == '__main__':
-    ChatBot().run()
+    TestApp().run()
      
     
               
