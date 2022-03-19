@@ -1,15 +1,16 @@
 from textwrap import indent
 from urllib import request, response
+import webbrowser
 from googleapiclient.discovery import build
 import json
-
 
 api_key = 'AIzaSyBlFVhDLPeriijIn2pgCKJmRkC3jpS_inQ'
 
 youtube = build('youtube', 'v3', developerKey=api_key)
 # ...
 
-titre = '中国话'
+sentenses = '#youtube#iseefire'
+titre = sentenses.split('#')[2]
 
 request = youtube.search().list(
     part='snippet',
@@ -23,4 +24,5 @@ response = request.execute()
 #fichier.close()
 
 print(response['items'][0]['snippet']['title'])
-print('https://www.youtube.com/watch?v='+response['items'][0]['id']['videoId'])
+webbrowser.open('https://www.youtube.com/watch?v='+response['items'][0]['id']['videoId'])
+

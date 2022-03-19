@@ -1,3 +1,4 @@
+from socket import timeout
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.core.window import Window
@@ -12,6 +13,8 @@ import tensorflow as tf
 import gc
 import numpy
 from pluginFactory import PluginFactory
+import os
+import time
  
 Window.size = (350,550)
 
@@ -61,6 +64,7 @@ class TestApp(MDApp):
         global size, halign, value
         if sm.get_screen('chats').text_input != "":
             value = sm.get_screen('chats').text_input.text
+            print(value)
             if len(value) < 6:
                 size = .22
                 halign = "center"
@@ -82,8 +86,6 @@ class TestApp(MDApp):
             sm.get_screen('chats').chat_list.add_widget(Command(text=value, size_hint_x=size, halign=halign))
             self.response(value)
             sm.get_screen('chats').text_input.text = ""
-
-        
          
     
     def analyse(self,sentence):

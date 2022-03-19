@@ -1,2 +1,2 @@
-model_checkpoint_path: "/Users/mathieualbin/Documents/CFA_Insta/Lecture_de_code/Python/Python_Session_Mars/lina/data/modelValues.tflearn"
-all_model_checkpoint_paths: "/Users/mathieualbin/Documents/CFA_Insta/Lecture_de_code/Python/Python_Session_Mars/lina/data/modelValues.tflearn"
+model_checkpoint_path: "/Users/blacolf/Documents/Bac+4/IA/Projet groupe/project_lina/data/modelValues.tflearn"
+all_model_checkpoint_paths: "/Users/blacolf/Documents/Bac+4/IA/Projet groupe/project_lina/data/modelValues.tflearn"
