@@ -85,6 +85,9 @@ class TestApp(MDApp):
                 halign = "left"
             sm.get_screen('chats').chat_list.add_widget(Command(text=value, size_hint_x=size, halign=halign))
             self.response(value)
+            #if "youtube" in value:
+            #    cmd = 'python3 Youtube_API.py'
+            #    os.system(cmd)
             sm.get_screen('chats').text_input.text = ""
          
     

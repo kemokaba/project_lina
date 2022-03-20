@@ -1,10 +1,12 @@
 from importlib import import_module
 import sys
 from time import sleep
+from unittest import result
 sys.path.append('../../')
 from pluginDefault import PluginDefault
 from urllib import request, response
 from googleapiclient.discovery import build
+import webbrowser
 import os
 import asyncio
 import time
@@ -32,15 +34,12 @@ class PluginYoutube(PluginDefault):
             q=titre,
             )
             result = request.execute()
-            #aself.responsevideo()
-            if "youtube" in sentence:
-                time.sleep(5)
-                cmd = 'python3 Youtube_API.py'
-                os.system(cmd)
+
+            webbrowser.open('https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId'])
+
             return result['items'][0]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId'])
 
 
-    
 
 
 
