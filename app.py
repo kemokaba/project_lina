@@ -124,11 +124,8 @@ class TestApp(MDApp):
         #while True:
             #print("Tape your sentence:")
             #test= input()
-        print("je pass la 00")
-        print("---->",value)
         rSubject, rType, rValue = self.analyse(value)
         self.result = self.searchAnswer(value, subjects[numpy.argmax(rSubject)], types[numpy.argmax(rType)])
-        print("---->", self.result)
         #print(result)
         return self.result
       
