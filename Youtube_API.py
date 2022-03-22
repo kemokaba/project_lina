@@ -9,7 +9,7 @@ api_key = 'AIzaSyBlFVhDLPeriijIn2pgCKJmRkC3jpS_inQ'
 youtube = build('youtube', 'v3', developerKey=api_key)
 # ...
 
-sentenses = '#youtube#iseefire'
+sentenses = '#youtube#YOASOBI - Monster'
 titre = sentenses.split('#')[2]
 
 request = youtube.search().list(
@@ -24,5 +24,6 @@ response = request.execute()
 #fichier.close()
 
 print(response['items'][0]['snippet']['title'])
-webbrowser.open('https://www.youtube.com/watch?v='+response['items'][0]['id']['videoId'])
+print(response['items'][1]['snippet']['title'])
+print(response['items'][2]['snippet']['title'])
 

@@ -35,15 +35,18 @@ class PluginYoutube(PluginDefault):
             )
             result = request.execute()
 
-            webbrowser.open('https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId'])
+            if "#open" in sentence:
+                choix = sentence.split(".")[1]
+                if choix == "1":
+                    webbrowser.open('https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId'])
+                    return result['items'][0]['snippet']['title']
+                elif choix == "2":
+                    webbrowser.open('https://www.youtube.com/watch?v='+result['items'][1]['id']['videoId'])
+                    return result['items'][1]['snippet']['title']
+                elif choix == "3":
+                    webbrowser.open('https://www.youtube.com/watch?v='+result['items'][2]['id']['videoId'])
+                    return result['items'][2]['snippet']['title']
 
-            return result['items'][0]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId'])
-
-
-
-
-
-   
-           
-
-        
+            return result['items'][0]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId']) + '\n' + \
+                    result['items'][1]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][1]['id']['videoId']) + '\n' + \
+                    result['items'][2]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][2]['id']['videoId'])
