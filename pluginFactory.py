@@ -2,6 +2,7 @@ from pluginDefault import PluginDefault
 from plugins.alarm.plugin import PluginAlarm
 from plugins.remote.plugin import PluginRemote
 from plugins.youtube.plugin import PluginYoutube
+from plugins.correction.plugin import PluginCorrection
 
 class PluginFactory:
 
@@ -13,5 +14,7 @@ class PluginFactory:
             return PluginRemote(subject, typeS)
         elif themeName== "youtube":
             return PluginYoutube(subject, typeS)
+        elif themeName== "correction":
+            return PluginCorrection(subject, typeS)
         return PluginDefault(subject, typeS)
         

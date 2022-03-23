@@ -7,9 +7,6 @@ from pluginDefault import PluginDefault
 from urllib import request, response
 from googleapiclient.discovery import build
 import webbrowser
-import os
-import asyncio
-import time
 
 api_key = 'AIzaSyBlFVhDLPeriijIn2pgCKJmRkC3jpS_inQ'
 
@@ -47,6 +44,9 @@ class PluginYoutube(PluginDefault):
                     webbrowser.open('https://www.youtube.com/watch?v='+result['items'][2]['id']['videoId'])
                     return result['items'][2]['snippet']['title']
 
+            #Si valuesentence = sentence.split(" ")[1] est null:
+            #return 'Champ vide'
+            
             return result['items'][0]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId']) + '\n' + \
                     result['items'][1]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][1]['id']['videoId']) + '\n' + \
                     result['items'][2]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][2]['id']['videoId'])
