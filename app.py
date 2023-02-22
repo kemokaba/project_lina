@@ -33,7 +33,7 @@ class Response(MDLabel):
     font_name = "Front/Poppins-Regular.ttf"
     font_size = 30
 
-class TestApp(MDApp):
+class LinaApp(MDApp):
 
     def build(self):
         # Create the screen manager
@@ -140,7 +140,7 @@ class TestApp(MDApp):
     
     
 if __name__ == '__main__':
-    TestApp().run()
+    LinaApp().run()
      
     
               

@@ -47,6 +47,6 @@ class PluginYoutube(PluginDefault):
             #Si valuesentence = sentence.split(" ")[1] est null:
             #return 'Champ vide'
             
-            return result['items'][0]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId']) + '\n' + \
-                    result['items'][1]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][1]['id']['videoId']) + '\n' + \
+            return result['items'][0]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][0]['id']['videoId']) + '\n\n' + \
+                    result['items'][1]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][1]['id']['videoId']) + '\n\n' + \
                     result['items'][2]['snippet']['title'] + ('  https://www.youtube.com/watch?v='+result['items'][2]['id']['videoId'])
